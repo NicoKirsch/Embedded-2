@@ -1,11 +1,10 @@
-#include "../include/utils.hpp"
+#include "../include/heartbeat.hpp"
 #include <iostream>
 
-void Watchdog::init(uint32_t t_ms) {
-    last = t_ms;
-    std::cout << "Watchdog initialisiert mit: " << last << " ms\n";
+void Heartbeat::init(uint32_t t_ms) {
+    last = t_ms; //initialisieren des Watchdog (nach wievielen Sekunden wird der Watchdog zurückgesetzt)
 }
 
-void Watchdog::feed() {
-    std::cout << "Watchdog gefuettert\n";
+void Heartbeat::feed() {
+    //Rückmeldung an den Watchdog
 }
