@@ -16,3 +16,4 @@ void Heartbeat::tick() {
     }
     last = now; //aktueller Zeitpunkt in ms
 }
+
