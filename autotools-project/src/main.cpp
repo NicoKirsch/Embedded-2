@@ -9,6 +9,11 @@ void delay_ms(int ms) {
     usleep(ms * 1000); // usleep nimmt Mikrosekunden
 }
 
+void millis() {
+    //output zufallswert zwischen 0 und 2000 ms
+    return rand() % 2000;
+}
+
 int main() {
     Heartbeat heart;
     
