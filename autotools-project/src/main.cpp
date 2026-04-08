@@ -28,7 +28,7 @@ int main() {
         heart.tick();
 
         digitalWrite(Pinx,0);
-        delay(1);
+        delay_ms(1);
 
         //Watchdog füttern
         heart.tick();
