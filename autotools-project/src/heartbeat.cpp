@@ -1,6 +1,11 @@
 #include "../include/heartbeat.hpp"
 #include <iostream>
 
+int millis() {
+    // muss durch die hal bibliothek ersetzt werden
+    return 2000;
+}
+
 void Heartbeat::init(uint32_t t_ms) {
     p = t_ms; //initialisieren des Watchdog (nach wievielen Sekunden wird der Watchdog zurückgesetzt)
     s = false; //Watchdog nicht ausgelöst
