@@ -5,9 +5,9 @@
 
 class Heartbeat{
 private:
-    uint32_t: last;
-    bool: s;
-    uint8: p;
+    uint32_t last;
+    bool s;
+    uint8_t p;
 
 public:
     void init(uint32_t t_ms);
