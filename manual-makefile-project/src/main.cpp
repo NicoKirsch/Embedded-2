@@ -1,15 +1,9 @@
-#include <iostream>
-#include <unistd.h> 
 #include "heartbeat.hpp"
-// mocking hal functions
-void digitalWrite(int pin, bool state) {
-}
-
-void delay_ms(int ms) {
-    usleep(ms * 1000); // usleep nimmt Mikrosekunden
-}
+#include "stm32l4xx_hal.h"
 
 int main() {
+    HAL_Init();
+    
     Heartbeat heart;
     
     // Watchdog initialisieren

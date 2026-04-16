@@ -1,15 +1,9 @@
-#include <iostream>
-#include <unistd.h> 
 #include "heartbeat.hpp"
-// mocking hal functions
-void digitalWrite(int pin, bool state) {
-}
-
-void delay_ms(int ms) {
-    usleep(ms * 1000); // usleep nimmt Mikrosekunden
-}
+#include "stm32l4xx_hal.h"
 
 int main() {
+    HAL_Init();
+    
     Heartbeat heart;
     
     // Watchdog initialisieren
@@ -21,21 +15,21 @@ int main() {
     // watchdog parallel zum Hauptprogramm laufen lassen
 
     while (true) {
-        digitalWrite(Pinx,1);
-        delay_ms(1);
+        HAL_GPIO_WritePin(GPIOC, (1 << Pinx), GPIO_PIN_SET); // digitalWrite(Pinx,1);
+        HAL_Delay(1);
         
         // Watchdog füttern
         heart.tick();
 
-        digitalWrite(Pinx,0);
-        delay_ms(1);
+        HAL_GPIO_WritePin(GPIOC, (1 << Pinx), GPIO_PIN_RESET); //  digitalWrite(Pinx,0);
+        HAL_Delay(1);
 
         //Watchdog füttern
         heart.tick();
 
         loopCounter++;
         if (loopCounter == 10) { // Nach 10 Schleifendurchläufen den Watchdog nicht mehr füttern
-            delay_ms(2000); // Simuliere eine Verzögerung, die den Watchdog auslöst
+            HAL_Delay(2000); // Simuliere eine Verzögerung, die den Watchdog auslöst
         }
     }
 
