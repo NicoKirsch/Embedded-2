@@ -12,7 +12,7 @@
 uint32_t HAL_GetTick();
 void HAL_Delay(uint32_t ms);
 void HAL_GPIO_WritePin(const char* port, int pin, int state);
-
+void NVIC_SystemReset();
 #define GPIO_PIN_SET 1
 #define GPIO_PIN_RESET 0
 

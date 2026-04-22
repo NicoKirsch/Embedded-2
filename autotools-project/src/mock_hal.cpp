@@ -17,3 +17,7 @@ void HAL_GPIO_WritePin(const char* port, int pin, int state) {
     std::cout << "[HAL] Port: " << port << " Pin: " << pin 
               << " State: " << (state ? "HIGH" : "LOW") << std::endl;
 }
+
+void NVIC_SystemReset() {
+    std::cout << "[HAL] System Reset triggered!" << std::endl;
+}
