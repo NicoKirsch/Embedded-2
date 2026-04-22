@@ -13,7 +13,7 @@ void Heartbeat::tick() {
     if (now - last >= p) { //Wenn mehr als p ms vergangen ist, löse Watchdog aus
         //stm32 Watchdog auslösen
         s = true; //Watchdog ausgelöst    
-        NVIC_SystemReset()   
+        NVIC_SystemReset();
     }
     last = now; //aktueller Zeitpunkt in ms
 }

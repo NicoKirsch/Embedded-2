@@ -1,8 +1,7 @@
 #include "heartbeat.hpp"
-#include "stm32l4xx_hal.h"
+#include "mock_hal.hpp"
 
 int main() {
-    HAL_Init();
     
     Heartbeat heart;
     

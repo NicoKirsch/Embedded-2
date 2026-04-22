@@ -1,5 +1,5 @@
-#include "../include/heartbeat.hpp"
-#include "stm32l4xx_hal.h"
+#include "heartbeat.hpp"
+#include "mock_hal.hpp"
 
 void Heartbeat::init(uint32_t t_ms) {
     p = t_ms; //initialisieren des Watchdog (nach wievielen Sekunden wird der Watchdog zurückgesetzt)
@@ -12,7 +12,8 @@ void Heartbeat::tick() {
     auto now = HAL_GetTick(); //aktueller Zeitpunkt in ms
     if (now - last >= p) { //Wenn mehr als p ms vergangen ist, löse Watchdog aus
         //stm32 Watchdog auslösen
-        s = true; //Watchdog ausgelöst       
+        s = true; //Watchdog ausgelöst    
+        NVIC_SystemReset();
     }
     last = now; //aktueller Zeitpunkt in ms
 }

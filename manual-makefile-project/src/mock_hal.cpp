@@ -1,36 +1,23 @@
-#include "heartbeat.hpp"
-#include "stm32l4xx_hal.h"
+#include "mock_hal.hpp"
+#include <iostream>
+#include <chrono>
+#include <thread>
 
-int main() {
-    HAL_Init();
-    
-    Heartbeat heart;
-    
-    // Watchdog initialisieren
-    // Beispiel: 200ms
-    heart.init(200);
+uint32_t HAL_GetTick() {
+    // Gibt die Zeit seit Start in Millisekunden zurück
+    auto now = std::chrono::steady_clock::now().time_since_epoch();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(now).count();
+}
 
-    int loopCounter = 0; // Zähler für die Anzahl der Schleifendurchläufe
-    // watchdog parallel zum Hauptprogramm laufen lassen
+void HAL_Delay(uint32_t ms) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+}
 
-    while (true) {
-        HAL_GPIO_WritePin(LEDPIN_GPIO_Port, LEDPIN_Pin, GPIO_PIN_SET); // digitalWrite(Pinx,1);
-        HAL_Delay(1);
-        
-        // Watchdog füttern
-        heart.tick();
+void HAL_GPIO_WritePin(const char* port, int pin, int state) {
+    std::cout << "[HAL] Port: " << port << " Pin: " << pin 
+              << " State: " << (state ? "HIGH" : "LOW") << std::endl;
+}
 
-        HAL_GPIO_WritePin(LEDPIN_GPIO_Port, LEDPIN_Pin, GPIO_PIN_RESET); //  digitalWrite(Pinx,0);
-        HAL_Delay(1);
-
-        //Watchdog füttern
-        heart.tick();
-
-        loopCounter++;
-        if (loopCounter == 10) { // Nach 10 Schleifendurchläufen den Watchdog nicht mehr füttern
-            HAL_Delay(2000); // Simuliere eine Verzögerung, die den Watchdog auslöst
-        }
-    }
-
-    return 0;
+void NVIC_SystemReset() {
+    std::cout << "[HAL] System Reset triggered!" << std::endl;
 }

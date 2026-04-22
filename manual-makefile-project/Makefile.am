@@ -1,4 +1,5 @@
 CXX = g++
+CC = gcc
 CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude -MMD -MP
 CFLAGS = -Wall -Wextra -Iinclude -MMD -MP
 SRC_DIR = src
