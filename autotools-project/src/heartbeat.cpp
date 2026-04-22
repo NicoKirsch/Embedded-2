@@ -1,5 +1,5 @@
-#include "../include/heartbeat.hpp"
-#include "stm32l4xx_hal.h"
+#include "heartbeat.hpp"
+#include "mock_hal.hpp"
 
 void Heartbeat::init(uint32_t t_ms) {
     p = t_ms; //initialisieren des Watchdog (nach wievielen Sekunden wird der Watchdog zurückgesetzt)
