@@ -2,7 +2,6 @@
 #include "mock_hal.hpp"
 
 int main() {
-    HAL_Init();
     
     Heartbeat heart;
     

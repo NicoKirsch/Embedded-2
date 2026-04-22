@@ -3,6 +3,11 @@
 
 #include <cstdint>
 
+
+// Mocks für die Hardware-Definitionen vom STM32
+#define LEDPIN_GPIO_Port "GPIOB"
+#define LEDPIN_Pin 3
+
 // Wir mappen die STM-Namen auf unsere Mock-Funktionen
 uint32_t HAL_GetTick();
 void HAL_Delay(uint32_t ms);
