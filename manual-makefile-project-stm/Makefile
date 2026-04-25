@@ -7,9 +7,8 @@ SIZE = arm-none-eabi-size
 # STM32L432 - Cortex-M4
 CPU_FLAGS = -mcpu=cortex-m4 -mthumb -mfloat-abi=soft
 
-CXXFLAGS = $(CPU_FLAGS) -I./include -Wall -Wextra -std=c++11 -fno-exceptions -fno-rtti -g -O2
-CFLAGS = $(CPU_FLAGS) -I./include -Wall -Wextra -g -O2
-LDFLAGS = $(CPU_FLAGS) -nodefaultlibs
+CXXFLAGS = $(CPU_FLAGS) -I./include -Wall -Wextra -std=c++11 -g -O2
+LDFLAGS = $(CPU_FLAGS)
 
 SOURCES = src/main.cpp src/heartbeat.cpp src/mock_hal.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
