@@ -2,8 +2,7 @@ AC_INIT([heartbeat_sensor], [1.0], [you@example.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CC
 AC_PROG_CXX
-AC_PROG_AR
-AM_PROG_AR
+AC_PROG_RANLIB
 
 # STM32L432 Cortex-M4 Cross-Compilation Flags
 ARM_CPU_FLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft"
