@@ -1,16 +1,18 @@
 AC_INIT([heartbeat_sensor], [1.0], [you@example.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+
+# Set ARM Cross-Compiler
+CC=arm-none-eabi-gcc
+CXX=arm-none-eabi-g++
+
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_RANLIB
 
 # STM32L432 Cortex-M4 Cross-Compilation Flags
-ARM_CPU_FLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft"
-ARM_CXXFLAGS="-fno-exceptions -fno-rtti -std=c++11"
-
-CFLAGS="${CFLAGS} ${ARM_CPU_FLAGS} -Wall -Wextra"
-CXXFLAGS="${CXXFLAGS} ${ARM_CPU_FLAGS} ${ARM_CXXFLAGS} -Wall -Wextra"
-LDFLAGS="${LDFLAGS} ${ARM_CPU_FLAGS}"
+CFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft -g -O2 -Wall -Wextra"
+CXXFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft -fno-exceptions -fno-rtti -std=c++11 -g -O2 -Wall -Wextra"
+LDFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft"
 
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([config.h])
