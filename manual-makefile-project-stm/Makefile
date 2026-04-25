@@ -1,39 +1,35 @@
-# STM32L432 Cross-Compilation Makefile
 CXX = arm-none-eabi-g++
-CC = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 SIZE = arm-none-eabi-size
 
-# STM32L432 - Cortex-M4
-CPU_FLAGS = -mcpu=cortex-m4 -mthumb -mfloat-abi=soft
-
-CXXFLAGS = $(CPU_FLAGS) -I./include -Wall -Wextra -std=c++11 -g -O2
-LDFLAGS = $(CPU_FLAGS)
+CPU = -mcpu=cortex-m4 -mthumb -mfloat-abi=soft
+CXXFLAGS = $(CPU) -I./include -Wall -Wextra -std=c++11 -g -O2 -fno-exceptions -fno-rtti
+LDFLAGS = $(CPU) -nostdlib
 
 SOURCES = src/main.cpp src/heartbeat.cpp src/mock_hal.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
-TARGET = heartbeat_sensor
-HEX = $(TARGET).hex
-BIN = $(TARGET).bin
+OBJS = $(SOURCES:.cpp=.o)
+ELF = heartbeat_sensor
+HEX = heartbeat_sensor.hex
+BIN = heartbeat_sensor.bin
 
-all: $(TARGET) $(HEX) $(BIN) size
+all: $(ELF) $(HEX) $(BIN) size
 
-$(TARGET): $(OBJECTS)
+$(ELF): $(OBJS)
 	$(CXX) $(LDFLAGS) -o $@ $^
 
-$(HEX): $(TARGET)
+$(HEX): $(ELF)
 	$(OBJCOPY) -O ihex $< $@
 
-$(BIN): $(TARGET)
+$(BIN): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-size: $(TARGET)
+size: $(ELF)
 	@$(SIZE) $<
 
 clean:
-	rm -f $(OBJECTS) $(TARGET) $(HEX) $(BIN)
+	rm -f $(OBJS) $(ELF) $(HEX) $(BIN)
 
 .PHONY: all clean size
