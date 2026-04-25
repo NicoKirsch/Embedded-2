@@ -1,10 +1,5 @@
 AC_INIT([heartbeat_sensor], [1.0], [you@example.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
-
-# Set ARM Cross-Compiler
-CC=arm-none-eabi-gcc
-CXX=arm-none-eabi-g++
-
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_RANLIB
