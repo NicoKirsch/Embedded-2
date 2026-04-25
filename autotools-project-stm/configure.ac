@@ -18,7 +18,7 @@ AC_PROG_RANLIB
 # STM32L432 Cortex-M4 Compiler-Flags
 CFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft -g -O2 -Wall -Wextra"
 CXXFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft -fno-exceptions -fno-rtti -std=c++11 -g -O2 -Wall -Wextra"
-LDFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft -nostdlib"
+LDFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft --specs=nosys.specs"
 
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([config.h])
