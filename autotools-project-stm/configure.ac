@@ -9,6 +9,9 @@ AM_CONDITIONAL([CROSS_COMPILE], [test "$cross_compiling" = yes])
 if test "$cross_compiling" = yes; then
     CC=arm-none-eabi-gcc
     CXX=arm-none-eabi-g++
+    # LDFLAGS VOR den PROG-Checks setzen!
+    LDFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft --specs=nosys.specs"
+    CFLAGS="-mcpu=cortex-m4 -mthumb -mfloat-abi=soft -g -O2"
 fi
 
 AC_PROG_CC
