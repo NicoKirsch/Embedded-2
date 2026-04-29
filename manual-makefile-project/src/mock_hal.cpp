@@ -4,7 +4,7 @@
 #include <thread>
 
 uint32_t HAL_GetTick() {
-    // Gibt die Zeit seit Start in Millisekunden zurück
+    // gibt Zeit seit Start in Millisekunden zurück
     auto now = std::chrono::steady_clock::now().time_since_epoch();
     return std::chrono::duration_cast<std::chrono::milliseconds>(now).count();
 }
